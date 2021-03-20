@@ -1,0 +1,50 @@
+<div class="news-detail">
+  <div class="news-detail__headline">{{ news.headline }}</div>
+  <div class="news-detail__date">Published: {{ news.date | date }}</div>
+  <div class="news-detail__image">
+    <img [src]="news.imageUrl" alt="">
+  </div>
+  <div class="news-detail__description">
+    {{ news.description }}
+  </div>
+</div>
+<div class="comments-section">
+  <div class="comments-section__heading">Comments</div>
+  <div class="comments-section__addComment">
+      <div>
+        <label>Your name:</label>
+        <input type="text" [(ngModel)]="leaveCommentName">
+      </div>
+      <div>
+        <textarea class="comments-section_addComment__textarea" placeholder="Add a comment..." [(ngModel)]="leaveCommentMessage"></textarea>
+      </div>
+      <div>
+      </div>
+    <button class="btn btn-dark" (click)="addComment()">Leave a comment</button>
+  </div>
+  <div class="comments" *ngFor="let comment of newsComments">
+    <div class="comments__content">
+      <div class="comments__content__userImage">
+        <img [src]="comment.userImage" alt="">
+      </div>
+      <div class="comments__content__userName">
+        {{ comment.user }}
+      </div>
+      <div class="comments__content__comment">
+        {{ comment.comment }}
+      </div>
+    </div>
+    <button class="btn btn-light mt-2" (click)="deleteComment(comment.id)">Delete a comment</button>
+  </div>
+</div>
+
+<style>
+.comments-section__addComment {
+    padding: 10px;
+}
+.comments-section_addComment__textarea{
+  width: 100%;
+  min-height: 60px;
+}
+
+</style>
