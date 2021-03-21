@@ -1,3 +1,8 @@
+
+<div class="form-group">
+  <input type="text" placeholder="Search news by headline" class="form-control" [(ngModel)]="headlineSearch" (ngModelChange)="Search()">
+</div>
+
 <div class="news" *ngFor="let new of news" [routerLink]="[new.id]">
   <div class="news__content">
     <div class="news__content__img">
