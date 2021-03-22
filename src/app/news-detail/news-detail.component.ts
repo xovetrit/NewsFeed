@@ -32,8 +32,8 @@ export class NewsDetailComponent implements OnInit {
   }
 
   clearLeaveCommentPlace(){
-    this.leaveCommentName = null;
-    this.leaveCommentMessage = null;
+    this.leaveCommentName = undefined;
+    this.leaveCommentMessage = undefined;
   }
 
 
