@@ -1,27 +1,36 @@
+import { AuthService } from './../auth.service';
 import { NewsService } from './../news.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { __core_private_testing_placeholder__ } from '@angular/core/testing';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'news-detail',
   templateUrl: './news-detail.component.html',
   styleUrls: ['./news-detail.component.css']
 })
-export class NewsDetailComponent implements OnInit {
+export class NewsDetailComponent implements OnInit, OnDestroy {
 
   news;
   newsId;
   newsComments;
   leaveCommentName: string;
   leaveCommentMessage: string;
+  authenticated = false;
+  loggedInSub: Subscription;
 
-  constructor(private route: ActivatedRoute, private newsService: NewsService) {}
+  constructor(private route: ActivatedRoute, private newsService: NewsService) {
+  }
 
   ngOnInit(): void {
     this.newsId = parseInt(this.route.snapshot.params['newsId'])
     this.news = this.newsService.getNewsById(this.newsId)
     this.newsComments = this.newsService.getCommentsByNewsId(this.newsId)
+
+    this.loggedInSub = AuthService.loggedIn.subscribe( loggedIn => {
+      this.authenticated = loggedIn
+    })
   }
 
   addComment(){
@@ -36,11 +45,12 @@ export class NewsDetailComponent implements OnInit {
     this.leaveCommentMessage = undefined;
   }
 
-
   deleteComment(commentId){
     this.newsService.deleteComment(commentId)
     this.newsComments = this.newsService.getCommentsByNewsId(this.newsId)
   }
 
-
+  ngOnDestroy(): void {
+    if ( this.loggedInSub ) this.loggedInSub.unsubscribe()
+  }
 }

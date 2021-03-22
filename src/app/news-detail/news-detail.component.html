@@ -38,16 +38,6 @@
         {{ comment.comment }}
       </div>
     </div>
-    <button class="btn btn-light mt-2" (click)="deleteComment(comment.id)">Delete a comment</button>
+    <button *ngIf="authenticated" class="btn btn-light mt-2" (click)="deleteComment(comment.id)" >Delete a comment</button>
   </div>
 </div>
-
-<style>
-.comments-section__addComment {
-    padding: 10px;
-}
-#comments-section_addComment__textarea{
-  min-height: 60px;
-}
-
-</style>

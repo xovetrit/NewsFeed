@@ -1,0 +1,7 @@
+<form class="form-signin" *ngIf="!user">
+  <input type="text" [(ngModel)]="userLogin" name="userLogin" class="form-control" placeholder="Login" required>
+  <input type="password" [(ngModel)]="userPassword" name="userPassword" class="form-control" placeholder="Password" required>
+  <div class="checkbox mb-3">
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="button" (click)="Login()" >Sign in</button>
+</form>

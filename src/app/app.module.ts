@@ -8,13 +8,18 @@ import { NewsDetailComponent } from './news-detail/news-detail.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { enableProdMode } from '@angular/core';
+enableProdMode()
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     NewsComponent,
-    NewsDetailComponent
+    NewsDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: NewsComponent},
-      { path: ':newsId', component: NewsDetailComponent }
+      { path: 'news/:newsId', component: NewsDetailComponent },
+      { path: 'login', component: LoginComponent }
     ])
   ],
   providers: [],
